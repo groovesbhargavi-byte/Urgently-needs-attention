@@ -77,6 +77,10 @@
       animation: fadeIn 1.5s forwards;
     }
 
+    .fade-in-text {
+      opacity: 0;
+    }
+
     @media (max-width: 600px) {
       h1 { font-size: 2rem; }
       p { font-size: 1rem; }
@@ -143,8 +147,13 @@
         <h1>ACCESS GRANTED ❤️</h1>
         <p>Tharun, you are officially my Valentine.</p>
         <img src="yes-picture.jpg" alt="Happy" class="responsive-img">
-        <p style="margin-top:20px; font-size:1.2rem; animation: fadeIn 1.5s forwards;">Am I a pro or what? Hi Hi Hi..</p>
+        <p class="fade-in-text" style="margin-top:20px; font-size:1.2rem;">Am I a pro or what? Hi Hi Hi..</p>
       `;
+
+      // Animate "Am I a pro..." text
+      const text = document.querySelector('.fade-in-text');
+      setTimeout(() => { text.style.transition = "opacity 1.5s"; text.style.opacity = 1; }, 100);
+
       for (let i = 0; i < 50; i++) setTimeout(spawnHeart, i*100);
     }
 
@@ -156,7 +165,6 @@
         <p>Oops! Not this time 😔</p>
         <img src="no-picture.jpg" alt="Disappointed" class="responsive-img">
       `;
-      // Optional: spawn hearts for effect
       for (let i = 0; i < 20; i++) setTimeout(spawnHeart, i*100);
     }
   </script>

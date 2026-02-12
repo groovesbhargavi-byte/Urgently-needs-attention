@@ -11,16 +11,16 @@
       font-family: monospace;
       margin: 0;
       overflow: hidden;
-      height: 100vh; /* full viewport */
-      position: relative; /* for floating hearts */
+      height: 100vh;
+      position: relative; /* for hearts */
     }
 
     /* Center container */
     #main-content {
       display: flex;
       flex-direction: column;
-      justify-content: center; /* vertical */
-      align-items: center;     /* horizontal */
+      justify-content: center;
+      align-items: center;
       height: 100%;
       text-align: center;
     }
@@ -143,25 +143,21 @@
         <h1>ACCESS GRANTED ❤️</h1>
         <p>Tharun, you are officially my Valentine.</p>
         <img src="yes-picture.jpg" alt="Happy" class="responsive-img">
+        <p style="margin-top:20px; font-size:1.2rem; animation: fadeIn 1.5s forwards;">Am I a pro or what? Hi Hi Hi..</p>
       `;
       for (let i = 0; i < 50; i++) setTimeout(spawnHeart, i*100);
     }
 
     // NO button
     function sayNo() {
-  alert("Error 404: Incorrect answer. Please try again.");
-
-  // Replace main content with disappointed image
-  document.body.innerHTML = `
-    <h1>ACCESS DENIED ❌</h1>
-    <p>Oops! Not this time 😔</p>
-    <img src="no-picture.jpg" alt="Disappointed" class="responsive-img">
-  `;
-
-  // Optional: spawn some hearts for effect
-  for (let i = 0; i < 20; i++) setTimeout(spawnHeart, i*100);
-}
-
+      alert("Error 404: Incorrect answer. Please try again.");
+      document.body.innerHTML = `
+        <h1>ACCESS DENIED ❌</h1>
+        <p>Oops! Not this time 😔</p>
+        <img src="no-picture.jpg" alt="Disappointed" class="responsive-img">
+      `;
+      // Optional: spawn hearts for effect
+      for (let i = 0; i < 20; i++) setTimeout(spawnHeart, i*100);
     }
   </script>
 

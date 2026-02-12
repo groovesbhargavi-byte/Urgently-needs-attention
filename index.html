@@ -75,12 +75,22 @@
     }
   </style>
 </head>
-<body>
+body {
+  background-color: #1a1a1a;
+  color: #ff4d6d;
+  font-family: monospace;
+  margin: 0;
+  overflow: hidden;
 
-<h1 style="animation-delay:0.3s;">> Initializing love.exe...</h1>
-<p id="line1" style="animation-delay:0.8s;"></p>
-<p id="line2" style="animation-delay:1.3s;"></p>
-<p id="line3" style="animation-delay:1.8s;"></p>
+  /* New Flexbox centering */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical centering */
+  align-items: center;     /* horizontal centering */
+  height: 100vh;           /* full viewport height */
+  text-align: center;
+}
+
 
 <button onclick="sayYes()" style="animation-delay:2.3s;">YES</button>
 <button onclick="sayNo()" style="animation-delay:2.3s;">NO</button>

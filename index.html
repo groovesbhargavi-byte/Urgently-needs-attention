@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Will You Be My Valentine?</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ff99;
+      font-family: monospace;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    button {
+      background-color: #00ff99;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      margin: 20px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    button:hover {
+      background-color: #00cc77;
+    }
+  </style>
+</head>
+<body>
+
+<h1>> Initializing love.exe...</h1>
+<p>> Running compatibility test...</p>
+<p>> Result: 100% match detected ❤️</p>
+<p>> Will you be my Valentine?</p>
+
+<button onclick="sayYes()">YES</button>
+<button onclick="sayNo()">NO</button>
+
+<script>
+function sayYes() {
+  document.body.innerHTML = "<h1>ACCESS GRANTED ❤️</h1><p>You are officially my Valentine.</p><p>Love.exe running permanently.</p>";
+}
+
+function sayNo() {
+  alert("Error 404: Incorrect answer. Please try again.");
+}
+</script>
+
+</body>
+</html>

@@ -130,7 +130,8 @@ function sayYes() {
   document.body.innerHTML = `
     <h1>ACCESS GRANTED ❤️</h1>
     <p>Tharun, you are officially my Valentine.</p>
-    <img src="yes-picture.jpg" alt="Happy">
+    <img src="yes-picture.jpg" alt="Happy" style="max-width: 90%; max-height: 60vh; margin-top: 20px; border-radius: 15px;">
+    
   `;
   for (let i = 0; i < 50; i++) setTimeout(spawnHeart, i*100);
 }

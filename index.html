@@ -12,7 +12,7 @@
       margin: 0;
       overflow: hidden;
       height: 100vh;
-      position: relative; /* for hearts */
+      position: relative; /* for floating hearts */
     }
 
     /* Center container */
@@ -144,10 +144,12 @@
     // YES button
     function sayYes() {
       document.body.innerHTML = `
-        <h1>ACCESS GRANTED ❤️</h1>
-        <p>Tharun, you are officially my Valentine.</p>
-        <img src="yes-picture.jpg" alt="Happy" class="responsive-img">
-        <p class="fade-in-text" style="margin-top:20px; font-size:1.2rem;">Am I a pro or what? Hi Hi Hi..</p>
+        <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; text-align:center;">
+          <h1>ACCESS GRANTED ❤️</h1>
+          <p>Tharun, you are officially my Valentine.</p>
+          <img src="yes-picture.jpg" alt="Happy" class="responsive-img">
+          <p class="fade-in-text" style="margin-top:20px; font-size:1.2rem;">Am I a pro or what? Hi Hi Hi..</p>
+        </div>
       `;
 
       // Animate "Am I a pro..." text
@@ -161,9 +163,11 @@
     function sayNo() {
       alert("Error 404: Incorrect answer. Please try again.");
       document.body.innerHTML = `
-        <h1>ACCESS DENIED ❌</h1>
-        <p>Oops! Not this time 😔</p>
-        <img src="no-picture.jpg" alt="Disappointed" class="responsive-img">
+        <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; text-align:center;">
+          <h1>ACCESS DENIED ❌</h1>
+          <p>Oops! Not this time 😔</p>
+          <img src="no-picture.jpg" alt="Disappointed" class="responsive-img">
+        </div>
       `;
       for (let i = 0; i < 20; i++) setTimeout(spawnHeart, i*100);
     }

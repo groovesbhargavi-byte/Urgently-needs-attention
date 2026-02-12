@@ -2,27 +2,70 @@
 <html>
 <head>
   <title>Will You Be My Valentine?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      background-color: black;
-      color: #00ff99;
+      background-color: #1a1a1a;
+      color: #ff4d6d;
       font-family: monospace;
       text-align: center;
-      padding-top: 100px;
+      padding-top: 50px;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin: 20px 10px;
+      word-wrap: break-word;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 10px 5px;
+      word-wrap: break-word;
     }
 
     button {
-      background-color: #00ff99;
+      background-color: #ff4d6d;
       border: none;
-      padding: 15px 30px;
-      font-size: 18px;
-      margin: 20px;
+      padding: 12px 25px;
+      font-size: 16px;
+      margin: 15px 10px;
       cursor: pointer;
       border-radius: 8px;
+      color: white;
+      transition: transform 0.2s;
     }
 
     button:hover {
-      background-color: #00cc77;
+      background-color: #ff1a3a;
+      transform: scale(1.1);
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: floatUp 2s linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-200px) scale(1.5); }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
     }
   </style>
 </head>
@@ -31,20 +74,34 @@
 <h1>> Initializing love.exe...</h1>
 <p>> Running compatibility test...</p>
 <p>> Result: 100% match detected ❤️</p>
-<p>> Will you be my Valentine?</p>
+<p>> Tharun, Will you be my Valentine?</p>
 
 <button onclick="sayYes()">YES</button>
 <button onclick="sayNo()">NO</button>
 
 <script>
 function sayYes() {
-  document.body.innerHTML = "<h1>ACCESS GRANTED ❤️</h1><p>You are officially my Valentine.</p><p>Love.exe running permanently.</p>";
+  document.body.innerHTML = "<h1>ACCESS GRANTED ❤️</h1><p>Tharun, you are officially my Valentine.</p><p>Love.exe running permanently.</p>";
+  createHearts();
 }
 
 function sayNo() {
   alert("Error 404: Incorrect answer. Please try again.");
 }
+
+function createHearts() {
+  for (let i = 0; i < 30; i++) {
+    let heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.fontSize = (20 + Math.random() * 30) + 'px';
+    heart.innerHTML = '❤️';
+    document.body.appendChild(heart);
+    setTimeout(() => { heart.remove(); }, 2000);
+  }
+}
 </script>
 
 </body>
 </html>
+

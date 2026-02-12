@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Will You Be My Valentine?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
@@ -14,17 +15,15 @@
       overflow: hidden;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin: 20px 10px;
-      word-wrap: break-word;
-    }
-
-    p {
-      font-size: 1.2rem;
+    h1, p {
       margin: 10px 5px;
       word-wrap: break-word;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
     }
+
+    h1 { font-size: 2.5rem; }
+    p { font-size: 1.2rem; min-height: 24px; }
 
     button {
       background-color: #ff4d6d;
@@ -35,12 +34,14 @@
       cursor: pointer;
       border-radius: 8px;
       color: white;
-      transition: transform 0.2s;
+      transition: transform 0.2s, box-shadow 0.5s, background-color 0.2s;
+      animation: fadeIn 1s forwards;
     }
 
     button:hover {
       background-color: #ff1a3a;
       transform: scale(1.1);
+      box-shadow: 0 0 20px #ff4d6d, 0 0 40px #ff4d6d;
     }
 
     .heart {
@@ -55,53 +56,97 @@
       100% { opacity: 0; transform: translateY(-200px) scale(1.5); }
     }
 
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
     @media (max-width: 600px) {
-      h1 {
-        font-size: 2rem;
-      }
-      p {
-        font-size: 1rem;
-      }
-      button {
-        padding: 10px 20px;
-        font-size: 14px;
-      }
+      h1 { font-size: 2rem; }
+      p { font-size: 1rem; }
+      button { padding: 10px 20px; font-size: 14px; }
+    }
+
+    img {
+      max-width: 80%;
+      margin-top: 20px;
+      border-radius: 15px;
+      opacity: 0;
+      animation: fadeIn 1.5s forwards;
     }
   </style>
 </head>
 <body>
 
-<h1>> Initializing love.exe...</h1>
-<p>> Running compatibility test...</p>
-<p>> Result: 100% match detected ❤️</p>
-<p>> Tharun, Will you be my Valentine?</p>
+<h1 style="animation-delay:0.3s;">> Initializing love.exe...</h1>
+<p id="line1" style="animation-delay:0.8s;"></p>
+<p id="line2" style="animation-delay:1.3s;"></p>
+<p id="line3" style="animation-delay:1.8s;"></p>
 
-<button onclick="sayYes()">YES</button>
-<button onclick="sayNo()">NO</button>
+<button onclick="sayYes()" style="animation-delay:2.3s;">YES</button>
+<button onclick="sayNo()" style="animation-delay:2.3s;">NO</button>
 
 <script>
+// Typing effect
+const lines = [
+  "> Running compatibility test...",
+  "> Result: 100% match detected ❤️",
+  "> Tharun, Will you be my Valentine?"
+];
+
+function typeLine(lineId, text, delay = 50, callback) {
+  let i = 0;
+  const el = document.getElementById(lineId);
+  function type() {
+    if (i < text.length) {
+      el.textContent += text[i];
+      i++;
+      setTimeout(type, delay);
+    } else if (callback) callback();
+  }
+  type();
+}
+
+// Sequential typing
+typeLine("line1", lines[0], 40, () => {
+  typeLine("line2", lines[1], 40, () => {
+    typeLine("line3", lines[2], 60);
+  });
+});
+
+// Floating hearts continuously
+function spawnHeart() {
+  let heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.style.left = Math.random() * window.innerWidth + 'px';
+  heart.style.fontSize = (20 + Math.random() * 30) + 'px';
+  heart.innerHTML = '❤️';
+  document.body.appendChild(heart);
+  setTimeout(() => { heart.remove(); }, 2000);
+}
+setInterval(spawnHeart, 300);
+
+// Button actions
 function sayYes() {
-  document.body.innerHTML = "<h1>ACCESS GRANTED ❤️</h1><p>Tharun, you are officially my Valentine.</p><p>Love.exe running permanently.</p>";
-  createHearts();
+  document.body.innerHTML = `
+    <h1>ACCESS GRANTED ❤️</h1>
+    <p>Tharun, you are officially my Valentine.</p>
+    <img src="yes-picture.jpg" alt="Happy">
+  `;
+  for (let i = 0; i < 50; i++) setTimeout(spawnHeart, i*100);
 }
 
 function sayNo() {
   alert("Error 404: Incorrect answer. Please try again.");
-}
-
-function createHearts() {
-  for (let i = 0; i < 30; i++) {
-    let heart = document.createElement('div');
-    heart.className = 'heart';
-    heart.style.left = Math.random() * window.innerWidth + 'px';
-    heart.style.fontSize = (20 + Math.random() * 30) + 'px';
-    heart.innerHTML = '❤️';
-    document.body.appendChild(heart);
-    setTimeout(() => { heart.remove(); }, 2000);
-  }
+  let img = document.createElement("img");
+  img.src = "no-picture.jpg";
+  img.alt = "Disappointed";
+  document.body.appendChild(img);
 }
 </script>
 
 </body>
 </html>
+
+
+
 

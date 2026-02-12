@@ -149,17 +149,19 @@
 
     // NO button
     function sayNo() {
-      alert("Error 404: Incorrect answer. Please try again.");
-      if (!document.getElementById("no-img")) {
-        let img = document.createElement("img");
-        img.src = "no-picture.jpg";
-        img.alt = "Disappointed";
-        img.id = "no-img";
-        img.className = "responsive-img";
-        const buttons = document.querySelectorAll("button");
-        if(buttons.length) buttons[buttons.length - 1].after(img);
-        else document.body.appendChild(img);
-      }
+  alert("Error 404: Incorrect answer. Please try again.");
+
+  // Replace main content with disappointed image
+  document.body.innerHTML = `
+    <h1>ACCESS DENIED ❌</h1>
+    <p>Oops! Not this time 😔</p>
+    <img src="no-picture.jpg" alt="Disappointed" class="responsive-img">
+  `;
+
+  // Optional: spawn some hearts for effect
+  for (let i = 0; i < 20; i++) setTimeout(spawnHeart, i*100);
+}
+
     }
   </script>
 

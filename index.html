@@ -5,29 +5,30 @@
   <title>Will You Be My Valentine?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background-color: #1a1a1a;
       color: #ff4d6d;
       font-family: monospace;
-      margin: 0;
       overflow: hidden;
-      height: 100vh;
-      position: relative; /* for floating hearts */
+      text-align: center;
+      flex-direction: column;
     }
 
-    /* Center container */
-    #main-content {
+    #page-content {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100%;
-      text-align: center;
     }
 
     h1, p {
       margin: 10px 5px;
-      word-wrap: break-word;
       opacity: 0;
       animation: fadeIn 1s forwards;
     }
@@ -90,8 +91,7 @@
 </head>
 <body>
 
-  <!-- Main content container -->
-  <div id="main-content">
+  <div id="page-content">
     <h1 style="animation-delay:0.3s;">> Initializing love.exe...</h1>
     <p id="line1" style="animation-delay:0.8s;"></p>
     <p id="line2" style="animation-delay:1.3s;"></p>
@@ -143,16 +143,13 @@
 
     // YES button
     function sayYes() {
-      document.body.innerHTML = `
-        <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; text-align:center;">
-          <h1>ACCESS GRANTED ❤️</h1>
-          <p>Tharun, you are officially my Valentine.</p>
-          <img src="yes-picture.jpg" alt="Happy" class="responsive-img">
-          <p class="fade-in-text" style="margin-top:20px; font-size:1.2rem;">Am I a pro or what? Hi Hi Hi..</p>
-        </div>
+      document.getElementById('page-content').innerHTML = `
+        <h1>ACCESS GRANTED ❤️</h1>
+        <p>Tharun, you are officially my Valentine.</p>
+        <img src="yes-picture.jpg" alt="Happy" class="responsive-img">
+        <p class="fade-in-text" style="margin-top:20px; font-size:1.2rem;">Am I a pro or what? Hi Hi Hi..</p>
       `;
 
-      // Animate "Am I a pro..." text
       const text = document.querySelector('.fade-in-text');
       setTimeout(() => { text.style.transition = "opacity 1.5s"; text.style.opacity = 1; }, 100);
 
@@ -162,12 +159,10 @@
     // NO button
     function sayNo() {
       alert("Error 404: Incorrect answer. Please try again.");
-      document.body.innerHTML = `
-        <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; text-align:center;">
-          <h1>ACCESS DENIED ❌</h1>
-          <p>Oops! Not this time 😔</p>
-          <img src="no-picture.jpg" alt="Disappointed" class="responsive-img">
-        </div>
+      document.getElementById('page-content').innerHTML = `
+        <h1>ACCESS DENIED ❌</h1>
+        <p>Oops! Not this time 😔</p>
+        <img src="no-picture.jpg" alt="Disappointed" class="responsive-img">
       `;
       for (let i = 0; i < 20; i++) setTimeout(spawnHeart, i*100);
     }

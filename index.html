@@ -5,14 +5,19 @@
   <title>Will You Be My Valentine?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    /* Center everything */
     body {
       background-color: #1a1a1a;
       color: #ff4d6d;
       font-family: monospace;
-      text-align: center;
-      padding-top: 50px;
       margin: 0;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
     }
 
     h1, p {
@@ -75,22 +80,12 @@
     }
   </style>
 </head>
-body {
-  background-color: #1a1a1a;
-  color: #ff4d6d;
-  font-family: monospace;
-  margin: 0;
-  overflow: hidden;
+<body>
 
-  /* New Flexbox centering */
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* vertical centering */
-  align-items: center;     /* horizontal centering */
-  height: 100vh;           /* full viewport height */
-  text-align: center;
-}
-
+<h1 style="animation-delay:0.3s;">> Initializing love.exe...</h1>
+<p id="line1" style="animation-delay:0.8s;"></p>
+<p id="line2" style="animation-delay:1.3s;"></p>
+<p id="line3" style="animation-delay:1.8s;"></p>
 
 <button onclick="sayYes()" style="animation-delay:2.3s;">YES</button>
 <button onclick="sayNo()" style="animation-delay:2.3s;">NO</button>
@@ -135,7 +130,7 @@ function spawnHeart() {
 }
 setInterval(spawnHeart, 300);
 
-// Button actions
+// YES button
 function sayYes() {
   document.body.innerHTML = `
     <h1>ACCESS GRANTED ❤️</h1>
@@ -145,23 +140,19 @@ function sayYes() {
   for (let i = 0; i < 50; i++) setTimeout(spawnHeart, i*100);
 }
 
+// NO button
 function sayNo() {
   alert("Error 404: Incorrect answer. Please try again.");
-  
-  // Check if the image already exists
   if (!document.getElementById("no-img")) {
     let img = document.createElement("img");
     img.src = "no-picture.jpg";
     img.alt = "Disappointed";
-    img.id = "no-img"; // give it an ID so it won’t duplicate
+    img.id = "no-img";
     img.className = "responsive-img";
-    
-    // Append below the buttons
     const buttons = document.querySelectorAll("button");
     buttons[buttons.length - 1].after(img);
   }
 }
-
 </script>
 
 </body>

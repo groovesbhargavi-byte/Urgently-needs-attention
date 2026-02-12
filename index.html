@@ -5,18 +5,23 @@
   <title>Will You Be My Valentine?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* Center everything */
     body {
       background-color: #1a1a1a;
       color: #ff4d6d;
       font-family: monospace;
       margin: 0;
       overflow: hidden;
+      height: 100vh; /* full viewport */
+      position: relative; /* for floating hearts */
+    }
+
+    /* Center container */
+    #main-content {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      justify-content: center; /* vertical */
+      align-items: center;     /* horizontal */
+      height: 100%;
       text-align: center;
     }
 
@@ -63,7 +68,6 @@
 
     @keyframes fadeIn { to { opacity: 1; } }
 
-    /* Responsive images */
     .responsive-img {
       max-width: 90%;
       max-height: 60vh;
@@ -82,78 +86,82 @@
 </head>
 <body>
 
-<h1 style="animation-delay:0.3s;">> Initializing love.exe...</h1>
-<p id="line1" style="animation-delay:0.8s;"></p>
-<p id="line2" style="animation-delay:1.3s;"></p>
-<p id="line3" style="animation-delay:1.8s;"></p>
+  <!-- Main content container -->
+  <div id="main-content">
+    <h1 style="animation-delay:0.3s;">> Initializing love.exe...</h1>
+    <p id="line1" style="animation-delay:0.8s;"></p>
+    <p id="line2" style="animation-delay:1.3s;"></p>
+    <p id="line3" style="animation-delay:1.8s;"></p>
 
-<button onclick="sayYes()" style="animation-delay:2.3s;">YES</button>
-<button onclick="sayNo()" style="animation-delay:2.3s;">NO</button>
+    <button onclick="sayYes()" style="animation-delay:2.3s;">YES</button>
+    <button onclick="sayNo()" style="animation-delay:2.3s;">NO</button>
+  </div>
 
-<script>
-// Typing effect
-const lines = [
-  "> Running compatibility test...",
-  "> Result: 100% match detected ❤️",
-  "> Tharun, Will you be my Valentine?"
-];
+  <script>
+    // Typing effect
+    const lines = [
+      "> Running compatibility test...",
+      "> Result: 100% match detected ❤️",
+      "> Tharun, Will you be my Valentine?"
+    ];
 
-function typeLine(lineId, text, delay = 50, callback) {
-  let i = 0;
-  const el = document.getElementById(lineId);
-  function type() {
-    if (i < text.length) {
-      el.textContent += text[i];
-      i++;
-      setTimeout(type, delay);
-    } else if (callback) callback();
-  }
-  type();
-}
+    function typeLine(lineId, text, delay = 50, callback) {
+      let i = 0;
+      const el = document.getElementById(lineId);
+      function type() {
+        if (i < text.length) {
+          el.textContent += text[i];
+          i++;
+          setTimeout(type, delay);
+        } else if (callback) callback();
+      }
+      type();
+    }
 
-// Sequential typing
-typeLine("line1", lines[0], 40, () => {
-  typeLine("line2", lines[1], 40, () => {
-    typeLine("line3", lines[2], 60);
-  });
-});
+    // Sequential typing
+    typeLine("line1", lines[0], 40, () => {
+      typeLine("line2", lines[1], 40, () => {
+        typeLine("line3", lines[2], 60);
+      });
+    });
 
-// Floating hearts continuously
-function spawnHeart() {
-  let heart = document.createElement('div');
-  heart.className = 'heart';
-  heart.style.left = Math.random() * window.innerWidth + 'px';
-  heart.style.fontSize = (20 + Math.random() * 30) + 'px';
-  heart.innerHTML = '❤️';
-  document.body.appendChild(heart);
-  setTimeout(() => { heart.remove(); }, 2000);
-}
-setInterval(spawnHeart, 300);
+    // Floating hearts
+    function spawnHeart() {
+      let heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.fontSize = (20 + Math.random() * 30) + 'px';
+      heart.innerHTML = '❤️';
+      document.body.appendChild(heart);
+      setTimeout(() => { heart.remove(); }, 2000);
+    }
+    setInterval(spawnHeart, 300);
 
-// YES button
-function sayYes() {
-  document.body.innerHTML = `
-    <h1>ACCESS GRANTED ❤️</h1>
-    <p>Tharun, you are officially my Valentine.</p>
-    <img src="yes-picture.jpg" alt="Happy" class="responsive-img">
-  `;
-  for (let i = 0; i < 50; i++) setTimeout(spawnHeart, i*100);
-}
+    // YES button
+    function sayYes() {
+      document.body.innerHTML = `
+        <h1>ACCESS GRANTED ❤️</h1>
+        <p>Tharun, you are officially my Valentine.</p>
+        <img src="yes-picture.jpg" alt="Happy" class="responsive-img">
+      `;
+      for (let i = 0; i < 50; i++) setTimeout(spawnHeart, i*100);
+    }
 
-// NO button
-function sayNo() {
-  alert("Error 404: Incorrect answer. Please try again.");
-  if (!document.getElementById("no-img")) {
-    let img = document.createElement("img");
-    img.src = "no-picture.jpg";
-    img.alt = "Disappointed";
-    img.id = "no-img";
-    img.className = "responsive-img";
-    const buttons = document.querySelectorAll("button");
-    buttons[buttons.length - 1].after(img);
-  }
-}
-</script>
+    // NO button
+    function sayNo() {
+      alert("Error 404: Incorrect answer. Please try again.");
+      if (!document.getElementById("no-img")) {
+        let img = document.createElement("img");
+        img.src = "no-picture.jpg";
+        img.alt = "Disappointed";
+        img.id = "no-img";
+        img.className = "responsive-img";
+        const buttons = document.querySelectorAll("button");
+        if(buttons.length) buttons[buttons.length - 1].after(img);
+        else document.body.appendChild(img);
+      }
+    }
+  </script>
 
 </body>
 </html>

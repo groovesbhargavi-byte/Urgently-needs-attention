@@ -137,12 +137,21 @@ function sayYes() {
 
 function sayNo() {
   alert("Error 404: Incorrect answer. Please try again.");
-  let img = document.createElement("img");
-  img.src = "no-picture.jpg";
-  img.alt = "Disappointed";
-  img.className = "responsive-img";
-  document.body.appendChild(img);
+  
+  // Check if the image already exists
+  if (!document.getElementById("no-img")) {
+    let img = document.createElement("img");
+    img.src = "no-picture.jpg";
+    img.alt = "Disappointed";
+    img.id = "no-img"; // give it an ID so it won’t duplicate
+    img.className = "responsive-img";
+    
+    // Append below the buttons
+    const buttons = document.querySelectorAll("button");
+    buttons[buttons.length - 1].after(img);
+  }
 }
+
 </script>
 
 </body>
